@@ -130,6 +130,41 @@
           }
         }
       }
+    },
+    "gstateLib": {
+      "root": "projects/gstate-lib",
+      "sourceRoot": "projects/gstate-lib/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/gstate-lib/tsconfig.lib.json",
+            "project": "projects/gstate-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/gstate-lib/src/test.ts",
+            "tsConfig": "projects/gstate-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/gstate-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/gstate-lib/tsconfig.lib.json",
+              "projects/gstate-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "gstate"
