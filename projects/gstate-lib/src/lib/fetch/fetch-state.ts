@@ -1,13 +1,9 @@
 export const FetchState = (fn: any, ...args: any[]) =>
   (target, propertyKey: string) => {
 
-    const getter = () =>  {
-      return fn(...args);
-    };
+    const getter = () => fn(...args);
 
-    const setter = (next) => {
-      console.log(propertyKey + ' cannot be set directly');🍦
-    };
+    const setter = (next) => console.log(propertyKey + ' cannot be set directly');
 
     Object.defineProperty(target, propertyKey, {
       get: getter,
