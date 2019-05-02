@@ -1,3 +1,4 @@
+
 export const FetchState = (fn: any, ...args: any[]) =>
   (target, propertyKey: string) => {
 
