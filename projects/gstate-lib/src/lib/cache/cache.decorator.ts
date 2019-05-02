@@ -1,4 +1,5 @@
 import {StateCacheService} from './state-cache.service';
+import {keyframes} from '@angular/animations';
 
 let cache: StateCacheService;
 
@@ -6,7 +7,7 @@ export const setStatCache = (stateCache: StateCacheService) => {
   cache = stateCache;
 };
 
-export const Cache = (cacheKey: string) =>
+export const Cacheable = (cacheKey: string) =>
   (target, key: string | symbol, descriptor: PropertyDescriptor) => {
     const original = descriptor.value;
 
@@ -19,6 +20,18 @@ export const Cache = (cacheKey: string) =>
 
         return result;
       }
+    };
+
+    return descriptor;
+  };
+
+export const CacheEvict = (cacheKey: string) =>
+  (target, key: string | symbol, descriptor: PropertyDescriptor) => {
+    const original = descriptor.value;
+
+    descriptor.value = (...args: any[]) => {
+      cache.clearCacheEntry(cacheKey);
+      return original.apply(this, args);
     };
 
     return descriptor;
