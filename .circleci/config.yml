@@ -21,6 +21,7 @@ jobs:
             - src/*
             - angular.json
             - package.json
+            - tsconfig.json
 
   install:
     <<: *defaults
@@ -40,6 +41,7 @@ jobs:
             - node_modules/*
             - angular.json
             - package.json
+            - tsconfig.json
 
       - run:
           command: |
@@ -64,6 +66,7 @@ jobs:
             - dist/*
             - angular.json
             - package.json
+            - tsconfig.json
 
       - run:
           command: |
