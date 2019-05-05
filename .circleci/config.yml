@@ -81,7 +81,7 @@ jobs:
       - run:
           command: |
             echo "//registry.npmjs.org/:_authToken=$npm_AUTH" >> ~/.npmrc
-            cd dist/gstate/
+            cd dist/gstate-lib/
             npm publish
 
 workflows:
