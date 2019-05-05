@@ -2,6 +2,11 @@
  * Public API Surface of gstate-lib
  */
 
-export * from './lib/cache/state-cache.service';
+export * from './lib/gstate.module';
 
-export * from './lib/fetch/fetch-state';
+export * from './lib/cache/cache.decorator';
+export * from './lib/cache/cache.service';
+
+export * from './lib/consumer/consumer.decorator';
+
+export * from './lib/supplier/supplier.decorator';

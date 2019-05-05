@@ -1,22 +1,18 @@
-import {StateCacheService} from './state-cache.service';
-import {keyframes} from '@angular/animations';
-
-let cache: StateCacheService;
-
-export const setStatCache = (stateCache: StateCacheService) => {
-  cache = stateCache;
-};
+import {CacheService} from './cache.service';
 
 export const Cacheable = (cacheKey: string) =>
   (target, key: string | symbol, descriptor: PropertyDescriptor) => {
     const original = descriptor.value;
 
     descriptor.value = ( ... args: any[]) => {
-      if (cache.hasValue(cacheKey)) {
-        return cache.retrieveFromCache(cacheKey);
+      if (CacheService.hasRegistry(cacheKey)) {
+        return CacheService.getRegistry(cacheKey);
       } else {
         const result = original.apply(this, args);
-        cache.storeCacheEntry(cacheKey, result);
+
+        if (result) {
+          CacheService.register(cacheKey, result);
+        }
 
         return result;
       }
@@ -30,7 +26,7 @@ export const CacheEvict = (cacheKey: string) =>
     const original = descriptor.value;
 
     descriptor.value = (...args: any[]) => {
-      cache.clearCacheEntry(cacheKey);
+      CacheService.clearRegistry(cacheKey);
       return original.apply(this, args);
     };
 
