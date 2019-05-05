@@ -19,7 +19,6 @@ jobs:
           paths:
             - projects/*
             - src/*
-            - *
 
   install:
     <<: *defaults
@@ -34,7 +33,9 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - ~/*
+            - projects/*
+            - src/*
+            - node_modules/*
 
       - run:
           command: |
@@ -53,7 +54,10 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - ~/*
+            - projects/*
+            - src/*
+            - node_modules/*
+            - dist/*
 
       - run:
           command: |
