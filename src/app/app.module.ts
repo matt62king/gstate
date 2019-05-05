@@ -1,16 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent } from './app.component';
+import {GstateModule} from '../../projects/gstate-lib/src/lib/gstate.module';
+import {FetcherComponent} from './fetcher/fetcher.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FetcherComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    GstateModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
