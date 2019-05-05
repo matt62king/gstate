@@ -1,4 +1,4 @@
-import {ConsumerRegistry} from '../consumer/consumer-registry.service';
+import {getConsumers} from '../consumer/consumer-registry.service';
 
 export const Suppler = (metaKey: string) =>
   (target, key: string | symbol, descriptor: PropertyDescriptor) => {
@@ -8,7 +8,7 @@ export const Suppler = (metaKey: string) =>
       const result = original.apply(this, args);
 
       if (result) {
-        ConsumerRegistry.getConsumers(metaKey)
+        getConsumers(metaKey)
           .forEach((consumer) => {
             consumer.target[consumer.propertyKey] = result;
           });
