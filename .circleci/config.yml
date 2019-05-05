@@ -17,7 +17,9 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - ~/*
+            - projects/*
+            - src/*
+            - *
 
   install:
     <<: *defaults
