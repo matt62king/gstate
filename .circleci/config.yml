@@ -1,0 +1,117 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:8.9
+  working_directory: ~/repo
+
+version: 2
+jobs:
+  stage:
+    <<: *defaults
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - projects/*
+            - src/*
+            - angular.json
+            - package.json
+            - tsconfig.json
+
+  install:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          command: |
+            npm install
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - projects/*
+            - src/*
+            - node_modules/*
+            - angular.json
+            - package.json
+            - tsconfig.json
+
+      - run:
+          command: |
+            ls
+
+  package:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          command: |
+            npm run package
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - projects/*
+            - src/*
+            - node_modules/*
+            - dist/*
+            - angular.json
+            - package.json
+            - tsconfig.json
+
+      - run:
+          command: |
+            ls
+
+  publish:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          command: |
+            echo "//registry.npmjs.org/:_authToken=$npm_AUTH" >> ~/.npmrc
+            cd dist/gstate/
+            npm publish
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - stage:
+          filters:
+            tags:
+              only: /.*/
+
+      - install:
+          requires:
+            - stage
+          filters:
+            tags:
+              only: /.*/
+
+      - package:
+          requires:
+            - install
+          filters:
+            tags:
+              only: /.*/
+
+      - publish:
+          requires:
+            - package
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/

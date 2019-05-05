@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "gstate-lib": [
+        "dist/gstate-lib"
+      ],
+      "gstate-lib/*": [
+        "dist/gstate-lib/*"
+      ]
+    }
   }
 }
