@@ -19,6 +19,8 @@ jobs:
           paths:
             - projects/*
             - src/*
+            - angular.json
+            - package.json
 
   install:
     <<: *defaults
@@ -36,6 +38,8 @@ jobs:
             - projects/*
             - src/*
             - node_modules/*
+            - angular.json
+            - package.json
 
       - run:
           command: |
@@ -58,6 +62,8 @@ jobs:
             - src/*
             - node_modules/*
             - dist/*
+            - angular.json
+            - package.json
 
       - run:
           command: |
@@ -74,7 +80,6 @@ jobs:
             echo "//registry.npmjs.org/:_authToken=$npm_AUTH" >> ~/.npmrc
             cd dist/gstate/
             npm publish
-
 
 workflows:
   version: 2
