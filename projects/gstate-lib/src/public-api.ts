@@ -3,6 +3,7 @@
  */
 
 export * from './lib/gstate.module';
+export * from './lib/gstate-root.module';
 
 export * from './lib/cache/cache.decorator';
 export * from './lib/cache/cache.service';
