@@ -1,7 +1,7 @@
 import {getConsumers} from '../consumer/consumer-registry.service';
 
-export const Suppler = (metaKey: string) =>
-  (target, key: string | symbol, descriptor: PropertyDescriptor) => {
+export const Supplier = (metaKey: string) =>
+  (target: object, key: string | symbol, descriptor: PropertyDescriptor) => {
     const original = descriptor.value;
 
     descriptor.value = ( ... args: any[]) => {
@@ -14,7 +14,7 @@ export const Suppler = (metaKey: string) =>
           });
       }
 
-      return result;
+      return origin;
     };
 
     return descriptor;
