@@ -12,10 +12,7 @@ export class FetchTestService {
 
   private static testValue$: Observable<string> | undefined  = undefined;
 
-  private httpClient =  InjectorInstance.get<HttpClient>(HttpClient);
-
   constructor(private http: HttpClient) {
-
   }
 
   @Cacheable('test')
@@ -25,24 +22,19 @@ export class FetchTestService {
 
   @CacheEvict('test')
   public static registerTest(): void {
-    console.log('set testValue$');
     FetchTestService.testValue$ = of('test method');
   }
 
-  // @Supplier('testKey')
   public supplierTest(): Observable<string> {
-    console.log(this.http);
-    console.log(this.httpClient);
     return of('from supplier test static method');
   }
 }
 
 export class FetchSupplier {
 
-  private static fetchService = InjectorInstance.get<FetchTestService>(FetchTestService);
-
   @Supplier('testKey')
   public static supplyTestRelay(): Observable<string> {
-    return this.fetchService.supplierTest();
+    const fetchService = InjectorInstance.get<FetchTestService>(FetchTestService);
+    return fetchService.supplierTest();
   }
 }
