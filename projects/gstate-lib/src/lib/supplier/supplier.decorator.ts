@@ -5,8 +5,7 @@ export const Supplier = (metaKey: string) =>
     const original = descriptor.value;
 
     descriptor.value = ( ... args: any[]) => {
-      target.constructor.apply(target);
-      const result = original.apply(target, args);
+      const result = original.apply(this, args);
 
       if (result) {
         getConsumers(metaKey)

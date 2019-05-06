@@ -29,10 +29,20 @@ export class FetchTestService {
     FetchTestService.testValue$ = of('test method');
   }
 
-  @Supplier('testKey')
+  // @Supplier('testKey')
   public supplierTest(): Observable<string> {
     console.log(this.http);
     console.log(this.httpClient);
     return of('from supplier test static method');
+  }
+}
+
+export class FetchSupplier {
+
+  private static fetchService = InjectorInstance.get<FetchTestService>(FetchTestService);
+
+  @Supplier('testKey')
+  public static supplyTestRelay(): Observable<string> {
+    return this.fetchService.supplierTest();
   }
 }

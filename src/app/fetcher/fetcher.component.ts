@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Consumer} from '../../../projects/gstate-lib/src/lib/consumer/consumer.decorator';
 import {Observable} from 'rxjs';
-import {FetchTestService} from '../fetch-test.service';
+import {FetchSupplier, FetchTestService} from '../fetch-test.service';
 
 @Component({
   selector: 'app-fetcher',
@@ -17,6 +17,6 @@ export class FetcherComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetcher.supplierTest();
+   FetchSupplier.supplyTestRelay();
   }
 }
