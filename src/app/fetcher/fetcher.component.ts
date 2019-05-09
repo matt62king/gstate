@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Consumer} from '../../../projects/gstate-lib/src/lib/consumer/consumer.decorator';
 import {Observable} from 'rxjs';
-import {FetchSupplier} from '../fetch-test.service';
+import {FetchTestService} from '../fetch-test.service';
 
 @Component({
   selector: 'app-fetcher',
@@ -11,12 +11,19 @@ import {FetchSupplier} from '../fetch-test.service';
 export class FetcherComponent implements OnInit {
 
   @Consumer('testKey')
-  private fetchTest$: Observable<string>;
+  fetchTest$: Observable<string>;
 
-  constructor() {
+  constructor(private fetch: FetchTestService) {
   }
 
   ngOnInit() {
-    FetchSupplier.supplyTestRelay();
+  }
+
+  changeMessage(): void {
+    this.fetch.supplierTest('second supplied value');
+  }
+
+  changeMessage2(): void {
+    this.fetch.supplierTest('third supplied value');
   }
 }

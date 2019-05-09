@@ -9,4 +9,4 @@ export * from './lib/cache/cache.service';
 
 export * from './lib/consumer/consumer.decorator';
 
-export * from './lib/supplier/supplier.decorator';
+export * from './lib/supplier/supplier-registry.service';

@@ -1,3 +1,12 @@
-<div *ngIf="(fetchTest$ | async) as test">
+<div *ngIf="fetchTest$ | async as test; else loading">
   {{ test }}
+</div>
+
+<ng-template #loading>
+  Click a button
+</ng-template>
+
+<div>
+  <button type="button" (click)="changeMessage()">Change</button>
+  <button type="button" (click)="changeMessage2()">Change 2</button>
 </div>
