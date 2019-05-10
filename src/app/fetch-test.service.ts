@@ -1,40 +1,18 @@
-import {Cacheable, CacheEvict} from '../../projects/gstate-lib/src/lib/cache/cache.decorator';
-import {Observable, of} from 'rxjs';
-import {Supplier} from '../../projects/gstate-lib/src/lib/supplier/supplier.decorator';
-import {HttpClient} from '@angular/common/http';
-import {InjectorInstance} from '../../projects/gstate-lib/src/lib/gstate-root.module';
+import {SupplierRegistryService} from '../../projects/gstate-lib/src/lib/supplier/supplier-registry.service';
 import {Injectable} from '@angular/core';
+import {Patch} from '../../projects/gstate-lib/src/lib/supplier/patch.decorator';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FetchTestService {
 
-  private static testValue$: Observable<string> | undefined  = undefined;
-
-  constructor(private http: HttpClient) {
+  constructor(private supplierRegistry: SupplierRegistryService) {
   }
 
-  @Cacheable('test')
-  public static testMethod(): Observable<string> | undefined {
-    return FetchTestService.testValue$;
+  public supplierTest(value: string): void {
+    this.test(value);
   }
 
-  @CacheEvict('test')
-  public static registerTest(): void {
-    FetchTestService.testValue$ = of('test method');
-  }
-
-  public supplierTest(): Observable<string> {
-    return of('from supplier test static method');
-  }
-}
-
-export class FetchSupplier {
-
-  @Supplier('testKey')
-  public static supplyTestRelay(): Observable<string> {
-    const fetchService = InjectorInstance.get<FetchTestService>(FetchTestService);
-    return fetchService.supplierTest();
-  }
+  @Patch('testKey') test = (value: string) => value;
 }
