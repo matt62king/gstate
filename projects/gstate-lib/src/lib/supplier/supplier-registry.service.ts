@@ -17,8 +17,16 @@ export class SupplierRegistryService {
     }
   }
 
-  public patch(key: string, value: any): void {
+  public set(key: string, value: any): void {
     this.registry.delete(key);
     this.register(key, value, true);
+  }
+
+  public patch(key: string, value: Partial<any>): void {
+    const original = this.registry.get(key);
+    const merged = {...original, ...value};
+
+    // this.registry.delete(key);
+    this.register(key, merged, true);
   }
 }

@@ -1,5 +1,5 @@
 <div *ngIf="fetchTest$ | async as test; else waiting">
-  {{ test }}
+  {{ test.string1 }} {{ test.string2 }} {{ test.string3 }}
 </div>
 
 <ng-template #waiting>
@@ -10,4 +10,5 @@
   <button type="button" (click)="changeMessage()">Change</button>
   <button type="button" (click)="changeMessage2()">Change 2</button>
   <button type="button" (click)="directPatch('direct patch change')">Change 3</button>
+  <button type="button" (click)="reset()">Reset</button>
 </div>
