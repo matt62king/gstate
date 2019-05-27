@@ -1,6 +1,11 @@
 {
   "name": "grippio-gstate",
-  "version": "0.0.4",
+  "version": "0.0.5",
+  "author": "Matt King",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matt62king/gstate"
+  },
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
