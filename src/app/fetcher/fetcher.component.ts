@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Consumer} from '../../../projects/gstate-lib/src/lib/consumer/consumer.decorator';
 import {Observable} from 'rxjs';
 import {FetchTestService} from '../fetch-test.service';
-import {Patch, Set} from '../../../projects/gstate-lib/src/lib/supplier/supplier.decorator';
+import {Patch, Push, Set} from '../../../projects/gstate-lib/src/lib/supplier/supplier.decorator';
 import {State} from './state';
 
 @Component({
@@ -14,6 +14,8 @@ export class FetcherComponent implements OnInit {
 
   @Consumer('testKey')
   fetchTest$: Observable<State>;
+
+  count = 0;
 
   constructor(private fetch: FetchTestService) {
   }
@@ -32,4 +34,6 @@ export class FetcherComponent implements OnInit {
   @Patch('testKey') directPatch = (value: string): Partial<State> => ({string3: value});
 
   @Set('testKey') reset = (): State => ({string1: undefined, string2: undefined, string3: undefined});
+
+  @Push() pushValue = (): string => 'testKey';
 }
