@@ -31,6 +31,7 @@ export class SupplierRegistryService {
 
   public push(key: string): void {
     const original = this.registry.get(key);
-    this.register(key, original, true);
+
+    this.register(key, {...original}, true);
   }
 }
