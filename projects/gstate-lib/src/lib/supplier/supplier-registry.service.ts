@@ -26,7 +26,11 @@ export class SupplierRegistryService {
     const original = this.registry.get(key);
     const merged = {...original, ...value};
 
-    // this.registry.delete(key);
     this.register(key, merged, true);
+  }
+
+  public push(key: string): void {
+    const original = this.registry.get(key);
+    this.register(key, original, true);
   }
 }
