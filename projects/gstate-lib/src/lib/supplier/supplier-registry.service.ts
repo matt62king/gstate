@@ -34,4 +34,8 @@ export class SupplierRegistryService {
 
     this.register(key, {...original}, true);
   }
+
+  public pull(key: string): void {
+    return this.registry.get(key);
+  }
 }

@@ -1,5 +1,14 @@
 <div *ngIf="fetchTest$ | async as test; else waiting">
-  {{ test.string1 }} {{ test.string2 }} {{ test.string3 }}
+  <div *ngFor="let key of objectKeys(test)">
+    <div>{{key + ': ' + test[key]}}</div>
+  </div>
+</div>
+
+<div *ngIf="showPulledState">
+  Pulled State:
+  <div *ngFor="let key of objectKeys(pulledState)">
+    <div>{{key + ': ' + pulledState[key]}}</div>
+  </div>
 </div>
 
 <ng-template #waiting>
@@ -11,5 +20,6 @@
   <button type="button" (click)="changeMessage2()">Change 2</button>
   <button type="button" (click)="directPatch('direct patch change')">Change 3</button>
   <button type="button" (click)="pushValue()">Push</button>
+  <button type="button" (click)="pullValue()">Pull</button>
   <button type="button" (click)="reset()">Reset</button>
 </div>
