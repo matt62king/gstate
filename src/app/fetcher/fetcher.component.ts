@@ -2,7 +2,7 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Consumer} from '../../../projects/gstate-lib/src/lib/consumer/consumer.decorator';
 import {Observable} from 'rxjs';
 import {FetchTestService} from '../fetch-test.service';
-import {Patch, Push, Set} from '../../../projects/gstate-lib/src/lib/supplier/supplier.decorator';
+import {Patch, Pull, Push, Set} from '../../../projects/gstate-lib/src/lib/supplier/supplier.decorator';
 import {State} from './state';
 
 @Component({
@@ -15,7 +15,9 @@ export class FetcherComponent implements OnInit {
   @Consumer('testKey')
   fetchTest$: Observable<State>;
 
-  count = 0;
+  objectKeys = Object.keys;
+  pulledState: State;
+  showPulledState: boolean;
 
   constructor(private fetch: FetchTestService) {
   }
@@ -36,4 +38,7 @@ export class FetcherComponent implements OnInit {
   @Set('testKey') reset = (): State => ({string1: undefined, string2: undefined, string3: undefined});
 
   @Push() pushValue = (): string => 'testKey';
+
+  @Pull('testKey', 'pulledState') pullValue = (): any => this.showPulledState = true;
 }
+
