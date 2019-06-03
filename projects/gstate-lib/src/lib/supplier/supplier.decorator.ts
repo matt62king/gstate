@@ -29,7 +29,6 @@ export const Pull = (metaKey: any, targetProperty: string | symbol): PropertyDec
     let originalValue = (): any => {};
 
     function wrapped(...args: any[]) {
-      console.log(target);
       originalValue.apply(target, args);
       const supplier: SupplierRegistryService = InjectorInstance.get<SupplierRegistryService>(SupplierRegistryService);
       target[targetProperty] = supplier.pull(metaKey);
