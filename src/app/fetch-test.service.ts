@@ -1,7 +1,7 @@
 import {SupplierRegistryService} from '../../projects/gstate-lib/src/lib/supplier/supplier-registry.service';
 import {Injectable} from '@angular/core';
-import {Patch} from '../../projects/gstate-lib/src/lib/supplier/supplier.decorator';
 import {State} from './fetcher/state';
+import {Patch} from '../../projects/gstate-lib/src/lib/supplier/decorators/patch.decotrator';
 
 @Injectable({
   providedIn: 'root'
