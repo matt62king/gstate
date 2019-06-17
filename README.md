@@ -65,12 +65,13 @@ pulledState: State;
 
 @Pull('key', 'pulledState') pullValue = (): any => this.showPulledState = !this.showPulledState;
 ```
----
 
 In the above case the state value of 'key' would be assigned to the 'pulledState' property. The
 function will be ran after the property assignment is made. Return values are not used by the library.
 
 Properties assigned with @Pull will not update when the state changes
+
+---
 
 ### Suppliers
 
