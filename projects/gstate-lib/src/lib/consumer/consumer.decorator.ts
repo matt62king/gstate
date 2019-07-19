@@ -2,8 +2,8 @@
 import {addConsumer} from './consumer-registry.service';
 import {Observable, Subject} from 'rxjs';
 
-export const Consumer = (metaKey: any) =>
-  (target: object, propertyKey: string) => {
+export function Consumer(metaKey: any): PropertyDecorator {
+  return (target: object, propertyKey: string) => {
     let value = new Subject();
     addConsumer(metaKey, target, propertyKey, value);
 
@@ -17,3 +17,4 @@ export const Consumer = (metaKey: any) =>
 
     Object.defineProperty(target, propertyKey, {get, set});
   };
+}
