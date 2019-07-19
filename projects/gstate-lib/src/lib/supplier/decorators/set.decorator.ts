@@ -2,7 +2,7 @@ import {SupplierRegistryService} from '../supplier-registry.service';
 import {InjectorInstance} from '../../gstate-root.module';
 import {Lambda} from '../util/suppler.util';
 
-export const Set = (metaKey: string): PropertyDecorator => {
+export function Set(metaKey: string): PropertyDecorator {
   return (target: any, key: string | symbol, descriptor?: TypedPropertyDescriptor<Lambda>) => {
     let originalValue = (): any => {};
 
@@ -21,4 +21,4 @@ export const Set = (metaKey: string): PropertyDecorator => {
 
     return descriptor;
   };
-};
+}
